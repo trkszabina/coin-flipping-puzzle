@@ -23,28 +23,17 @@ class CoinsTest {
         assertFalse(state1.isGoal());
         assertTrue(state2.isGoal());
     }
-
+    
     @Test
-    void TestForCanFlip()
+
+    void TestForGetFlips()
+
     {
-        BitSet variable = new BitSet(6);
-        assertFalse(state1.canFlip(variable));
-        variable.set(0, 3);
-        assertTrue(state1.canFlip(variable));
-        assertTrue(state2.canFlip(variable));
-        variable = new BitSet(8);
-        assertFalse(state1.canFlip(variable));
-        assertFalse(state1.canFlip(variable));
-        variable = new BitSet(4);
-        variable.set(0, 3);
-        assertTrue(state1.canFlip(variable));
-        assertTrue(state2.canFlip(variable));
-        variable = new BitSet(5);
-        variable.set(1, 2);
-        assertFalse(state1.canFlip(variable));
-        assertFalse(state2.canFlip(variable));
+        List<BitSet> flips = Coins.generateFlips(7, 3);
+        assertEquals(flips.size(), state1.getFlips().size());
     }
 
+ 
     @Test
     void TestForFlip()
     {
@@ -63,23 +52,14 @@ class CoinsTest {
 
 
     @Test
-    void TestForGenerateFlips() {
-        long pc = CombinatoricsUtils.binomialCoefficient(15, 8);
+    void TestForGenerateFlips() 
+    {
+        long pc = CombinatoricsUtils.binomialCoefficient(15, 9);
         List<BitSet> flips = Coins.generateFlips(15, 8);
         assertEquals((int) pc, flips.size());
         pc = CombinatoricsUtils.binomialCoefficient(8, 3);
         flips = Coins.generateFlips(8, 3);
         assertEquals((int) pc, flips.size());
     }
-
-
-    @Test
-    void TestForGetFlips()
-    {
-        List<BitSet> flips = Coins.generateFlips(7, 3);
-        assertEquals(flips.size(), state1.getFlips().size());
-    }
-
-
 
 }
